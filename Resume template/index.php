@@ -33,6 +33,7 @@
 // Convert the JSON string to an array
     $projects1 = json_decode($jsonProjects1);
     $projects2 = json_decode($jsonProjects2);
+    echo $jsonProjects2;
         ?>
             
             <div class="container">
@@ -98,11 +99,11 @@
                             <textarea class="readonly-noborder desc" name="project_desc" placeholder="Project Description" style="border:none;"  readonly><?php echo $project_desc; ?></textarea>
                             </div>
                             <div class="project-inputs-container">
-                            <?php if (!empty($projects1)) { ?>
+                            <?php if (!empty($projects1) && !empty($projects2)) { ?>
                                 <?php for ($i = 0; $i < count($projects1); $i++) { ?>
                                     <div class="input-container projects">
                                         <input class="readonly-noborder" type="text" name="project_title" placeholder="Project Title" value="<?php echo htmlspecialchars($projects1[$i]); ?>" readonly>
-                                        <textarea class="readonly-noborder desc" name="project_desc" placeholder="Project Description" style="border:none;"  readonly><?php echo $project_desc; ?></textarea>
+                                        <textarea class="readonly-noborder desc" name="project_desc" placeholder="Project Description" style="border:none;"  readonly><?php echo $projects2[$i]; ?></textarea>
                                     </div>
                                 <?php } ?>
                             <?php } ?>
@@ -304,7 +305,7 @@ toggleButton1.addEventListener('click', function() {
         projectTitleInput1.removeAttribute('readonly');
         toggleButton1.textContent = 'Save';
     } else {
-        projectTitleInput1.setAttribute('readonly', 'readonly');
+        projectTitleInput1.setAttribute('readonly', true);
         toggleButton1.textContent = 'Edit';
         projectTitleValues.push(projectTitleInput1.value);
         var jsonProjectTitleValues = JSON.stringify(projectTitleValues);
@@ -317,7 +318,7 @@ toggleButton2.addEventListener('click', function() {
         projectDescriptionInput2.removeAttribute('readonly');
         toggleButton2.textContent = 'Save';
     } else {
-        projectDescriptionInput2.setAttribute('readonly', 'readonly');
+        projectDescriptionInput2.setAttribute('readonly', true);
         toggleButton2.textContent = 'Edit';
         projectDescriptionValues.push(projectDescriptionInput2.value);
         var jsonProjectDescValues = JSON.stringify(projectDescriptionValues);
@@ -353,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 input.removeAttribute('readonly');
                 button.textContent = 'Save';
             } else {
-                input.setAttribute('readonly', 'readonly');
+                input.setAttribute('readonly', true);
                 button.textContent = 'Edit';
             }
         });
